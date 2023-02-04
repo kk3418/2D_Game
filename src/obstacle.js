@@ -8,7 +8,7 @@ class Obstacle {
 
   draw(ctx) {
     for (let obstacle of this.obstacles) {
-      this.ctx.fillStyle = "green";
+      ctx.fillStyle = "green";
       ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
     }
   }

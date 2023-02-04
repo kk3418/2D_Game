@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ESNext",
+    "baseUrl": "./src",
+    "paths": {
+      "~/*": ["./*"]
+    },
+  },
+  "include": ["src/**/*"]
+}

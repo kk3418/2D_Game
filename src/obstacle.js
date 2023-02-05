@@ -32,7 +32,7 @@ class Obstacle {
   generateObstacle(n = 1) {
     for (let i = 0; i < n; i++) {
       this.obstacles.push({
-        x: 150 - this.width + Math.floor(Math.random() * 50 + 1),
+        x: 250 - this.width + Math.floor(Math.random() * 50 + 1),
         y: Math.floor((Math.random() * 1000) / 7),
         width: this.width,
         height: this.height,

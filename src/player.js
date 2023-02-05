@@ -1,7 +1,7 @@
 class Player {
-  constructor(game) {
+  constructor(keys) {
     this.player = { x: 0, y: 0, width: 15, height: 30 };
-    this.game = game;
+    this.keys = keys;
   }
 
   draw(ctx) {
@@ -10,9 +10,9 @@ class Player {
   }
 
   update() {
-    if (this.game.keys.includes("ArrowUp")) {
+    if (this.keys.includes("ArrowUp")) {
       this.movePlayer("up");
-    } else if (this.game.keys.includes("ArrowDown")) {
+    } else if (this.keys.includes("ArrowDown")) {
       this.movePlayer("down");
     }
   }

@@ -1,33 +1,30 @@
 import InputHandler from "~/inputHandler";
 import Obstacle from "~/obstacle";
 import Player from "~/player";
+import Bullet from "~/bullet";
 
 class Game {
   constructor() {
     this.keys = [];
-    this.input = new InputHandler(this);
-    this.Player = new Player(this);
+    this.input = new InputHandler(this.keys);
+    this.Player = new Player(this.keys);
     this.Obstacle = new Obstacle();
-    this.bullet = { x: 0, y: 0, width: 30, height: 5 };
+    this.Bullet = new Bullet(this.keys, this.Player.player);
     this.canvas = document.getElementById("canvas");
     this.ctx = this.canvas.getContext("2d");
   }
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.fillStyle = "black";
-    this.ctx.fillRect(this.bullet.x, this.bullet.y, this.bullet.width, this.bullet.height);
     this.Player.draw(this.ctx);
     this.Obstacle.draw(this.ctx);
+    this.Bullet.draw(this.ctx);
   }
 
   update() {
     this.Obstacle.update();
     this.Player.update();
-  }
-
-  shootBullet() {
-    this.bullet.x += 10;
+    this.Bullet.update();
   }
 
   checkCollision() {

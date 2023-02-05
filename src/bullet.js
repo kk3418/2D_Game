@@ -1,9 +1,10 @@
 class Bullet {
-  constructor(keys, player) {
+  constructor(keys, player, obstacles) {
     this.bullets = [];
     this.bulletSpeed = 1.7;
     this.keys = keys;
     this.player = player;
+    this.obstacles = obstacles;
   }
 
   draw(ctx) {
@@ -18,9 +19,34 @@ class Bullet {
       // TODO: need debounce
       this.shootBullet();
     }
+    this.shutdown();
     this.bullets.forEach((bullet) => {
       bullet.x += this.bulletSpeed;
     });
+  }
+
+  shutdown() {
+    let deleteTarget;
+    for (let i = 0; i < this.bullets.length; i++) {
+      for (let j = 0; j < this.obstacles.length; j++) {
+        const horizontal = this.bullets[i].x + this.bullets[i].width > this.obstacles[j].x;
+        const vertical =
+          this.obstacles[j].y <
+          this.bullets[i].y + this.bullets[i].height <
+          this.obstacles[j].y + this.obstacles[j].height;
+        if (horizontal && vertical) {
+          deleteTarget = { i, j };
+          break;
+        }
+      }
+      if (deleteTarget) {
+        break;
+      }
+    }
+    if (deleteTarget) {
+      this.bullets.splice(deleteTarget.i, 1);
+      this.obstacles.splice(deleteTarget.j, 1);
+    }
   }
 
   shootBullet() {

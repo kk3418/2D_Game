@@ -9,7 +9,7 @@ class Game {
     this.input = new InputHandler(this.keys);
     this.Player = new Player(this.keys);
     this.Obstacle = new Obstacle();
-    this.Bullet = new Bullet(this.keys, this.Player.player);
+    this.Bullet = new Bullet(this.keys, this.Player.player, this.Obstacle.obstacles);
     this.canvas = document.getElementById("canvas");
     this.ctx = this.canvas.getContext("2d");
   }
@@ -32,7 +32,7 @@ class Game {
     for (let obstacle of this.Obstacle.obstacles) {
       if (
         player.x + player.width > obstacle.x &&
-        player.x < player.x + obstacle.width &&
+        player.x < obstacle.x + obstacle.width &&
         player.y + player.height > obstacle.y &&
         player.y < obstacle.y + obstacle.height
       ) {

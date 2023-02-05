@@ -7,25 +7,29 @@ class Obstacle {
   }
 
   draw(ctx) {
-    for (let obstacle of this.obstacles) {
-      ctx.fillStyle = "green";
+    ctx.fillStyle = "green";
+    this.obstacles.forEach((obstacle) => {
       ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-    }
+    });
   }
 
   update() {
-    let min = 0;
-    this.obstacles.forEach((obstacle) => {
-      if (obstacle.x + 25 > min) {
-        min = obstacle.x + 25;
+    let deleteIndex;
+
+    for (let i = 0; i < this.obstacles.length; i++) {
+      if (this.obstacles[i].x + this.obstacles[i].width < 0) {
+        deleteIndex = i;
       }
-    });
-    if (min <= 0) {
+    }
+
+    if (deleteIndex) {
+      this.obstacles.splice(deleteIndex, 1);
+    }
+
+    if (this.obstacles.length === 0) {
       this.generateObstacle(3);
     }
-    if (this.obstacles.length > 3) {
-      this.obstacles = [];
-    }
+
     this.moveObstacle();
   }
 

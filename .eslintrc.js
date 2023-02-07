@@ -3,11 +3,12 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: ["eslint:recommended", "prettier"],
+  extends: ["eslint:recommended"],
   rules: {
-    singleQuote: false,
-    trailingComma: "es5",
-    printWidth: 120,
-    tabWidth: 2,
+    singleQuote: 0,
+    trailingComma: 0,
+  },
+  parserOpotions: {
+    ecmaVersion: "latest",
   },
 };

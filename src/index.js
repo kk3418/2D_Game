@@ -21,8 +21,8 @@ class Game {
     this.Bullet.draw(this.ctx);
   }
 
-  update() {
-    this.Obstacle.update();
+  update({ obstacleNumber = 3 }) {
+    this.Obstacle.update(obstacleNumber);
     this.Player.update();
     this.Bullet.update();
   }
@@ -44,14 +44,14 @@ class Game {
   }
 }
 
+const obstacleNumber = 2;
 const game = new Game();
-game.Obstacle.generateObstacle(3);
 
 function loop() {
   if (game.checkCollision()) {
     return;
   }
-  game.update();
+  game.update({ obstacleNumber });
   game.draw();
   requestAnimationFrame(loop);
 }

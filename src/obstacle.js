@@ -13,7 +13,7 @@ class Obstacle {
     });
   }
 
-  update() {
+  update(n) {
     let deleteIndex;
 
     for (let i = 0; i < this.obstacles.length; i++) {
@@ -23,11 +23,12 @@ class Obstacle {
     }
 
     if (deleteIndex) {
+      console.log("delete", deleteIndex);
       this.obstacles.splice(deleteIndex, 1);
     }
 
-    if (this.obstacles.length === 0) {
-      this.generateObstacle(3);
+    if (this.obstacles.length < n) {
+      this.generateObstacle(n);
     }
 
     this.moveObstacle();

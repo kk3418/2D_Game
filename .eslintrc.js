@@ -8,7 +8,8 @@ module.exports = {
     singleQuote: 0,
     trailingComma: 0,
   },
-  parserOpotions: {
+  parserOptions: {
+    sourceType: "module",
     ecmaVersion: "latest",
   },
 };

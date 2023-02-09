@@ -15,8 +15,8 @@ class Bullet {
   }
 
   update() {
-    if (this.keys.includes("Space")) {
-      // TODO: need debounce
+    const bulletsLength = this.bullets.length;
+    if (this.keys.includes("Space") && bulletsLength == 0) {
       this.shootBullet();
     }
     this.shutdown();
@@ -30,10 +30,11 @@ class Bullet {
     for (let i = 0; i < this.bullets.length; i++) {
       for (let j = 0; j < this.obstacles.length; j++) {
         const horizontal = this.bullets[i].x + this.bullets[i].width > this.obstacles[j].x;
-        const vertical =
-          this.obstacles[j].y <
-          this.bullets[i].y + this.bullets[i].height <
-          this.obstacles[j].y + this.obstacles[j].height;
+        const bulletY = this.bullets[i].y + this.bullets[i].height;
+        const lowerBound = this.obstacles[j].y + this.obstacles[j].height + this.player.height / 3;
+        const upperBound = this.obstacles[j].y - this.player.height / 3;
+        const vertical = upperBound < bulletY && bulletY < lowerBound;
+
         if (horizontal && vertical) {
           deleteTarget = { i, j };
           break;
@@ -57,6 +58,7 @@ class Bullet {
       y: this.player.y + this.player.height / 2,
     };
     this.bullets.push(bullet);
+    console.log("bullets status (when shootBullet triggered)", this.bullets);
   }
 }
 

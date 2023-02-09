@@ -23,7 +23,6 @@ class Obstacle {
     }
 
     if (deleteIndex) {
-      console.log("delete", deleteIndex);
       this.obstacles.splice(deleteIndex, 1);
     }
 

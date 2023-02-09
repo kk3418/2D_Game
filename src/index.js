@@ -46,12 +46,15 @@ class Game {
 
 const obstacleNumber = 2;
 const game = new Game();
+let lastTime = 0;
 
-function loop() {
+function loop(timeStamp) {
+  const deltaTime = timeStamp - lastTime;
+  lastTime = timeStamp;
   if (game.checkCollision()) {
     return;
   }
-  game.update({ obstacleNumber });
+  game.update({ obstacleNumber, deltaTime });
   game.draw();
   requestAnimationFrame(loop);
 }

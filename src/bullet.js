@@ -50,10 +50,10 @@ class Bullet {
   }
 
   shootBullet(deltaTime) {
-    if (this.keys.includes("Space")) {
-      if (this.updateTime < this.maxUpdateTime) {
-        this.updateTime += deltaTime;
-      } else {
+    if (this.updateTime < this.maxUpdateTime) {
+      this.updateTime += deltaTime;
+    } else {
+      if (this.keys.includes("Space")) {
         this.generateBullet();
         this.updateTime = 0;
       }

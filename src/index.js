@@ -21,10 +21,10 @@ class Game {
     this.Bullet.draw(this.ctx);
   }
 
-  update({ obstacleNumber = 3 }) {
+  update({ obstacleNumber = 3, deltaTime }) {
     this.Obstacle.update(obstacleNumber);
     this.Player.update();
-    this.Bullet.update();
+    this.Bullet.update(deltaTime);
   }
 
   checkCollision() {
@@ -44,7 +44,7 @@ class Game {
   }
 }
 
-const obstacleNumber = 2;
+const obstacleNumber = 3;
 const game = new Game();
 let lastTime = 0;
 

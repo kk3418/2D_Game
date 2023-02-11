@@ -5,6 +5,8 @@ class Bullet {
     this.keys = keys;
     this.player = player;
     this.obstacles = obstacles;
+    this.maxUpdateTime = 350;
+    this.updateTime = 0;
   }
 
   draw(ctx) {
@@ -14,11 +16,8 @@ class Bullet {
     });
   }
 
-  update() {
-    const bulletsLength = this.bullets.length;
-    if (this.keys.includes("Space") && bulletsLength == 0) {
-      this.shootBullet();
-    }
+  update(deltaTime) {
+    this.shootBullet(deltaTime);
     this.shutdown();
     this.bullets.forEach((bullet) => {
       bullet.x += this.bulletSpeed;
@@ -50,7 +49,18 @@ class Bullet {
     }
   }
 
-  shootBullet() {
+  shootBullet(deltaTime) {
+    if (this.keys.includes("Space")) {
+      if (this.updateTime < this.maxUpdateTime) {
+        this.updateTime += deltaTime;
+      } else {
+        this.generateBullet();
+        this.updateTime = 0;
+      }
+    }
+  }
+
+  generateBullet() {
     const bullet = {
       width: 30,
       height: 5,

@@ -65,7 +65,7 @@ class Bullet {
       width: 30,
       height: 5,
       x: this.player.x + this.player.width,
-      y: this.player.y + this.player.height / 2,
+      y: this.player.y + this.player.height / 2 - 2.5,
     };
     this.bullets.push(bullet);
     console.log("bullets status (when shootBullet triggered)", this.bullets);

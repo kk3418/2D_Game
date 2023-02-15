@@ -1,11 +1,14 @@
 class Player {
   constructor(keys) {
-    this.player = { x: 0, y: 0, width: 15, height: 30 };
+    this.player = { x: 0, y: 0, width: 15, height: 15 };
     this.keys = keys;
+    // this.image = document.getElementById("player");
   }
 
   draw(ctx) {
     ctx.fillStyle = "red";
+    ctx.imageSmoothingEnabled = true;
+    // ctx.drawImage(this.image, 0, 0, 800, 800, this.player.x, this.player.y, this.player.width, this.player.height);
     ctx.fillRect(this.player.x, this.player.y, this.player.width, this.player.height);
   }
 

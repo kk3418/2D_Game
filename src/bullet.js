@@ -1,7 +1,7 @@
 class Bullet {
   constructor(keys, player, obstacles) {
     this.bullets = [];
-    this.bulletSpeed = 1.7;
+    this.bulletSpeed = 6;
     this.keys = keys;
     this.player = player;
     this.obstacles = obstacles;
@@ -62,8 +62,8 @@ class Bullet {
 
   generateBullet() {
     const bullet = {
-      width: 30,
-      height: 5,
+      width: 150,
+      height: 25,
       x: this.player.x + this.player.width,
       y: this.player.y + this.player.height / 2 - 2.5,
     };

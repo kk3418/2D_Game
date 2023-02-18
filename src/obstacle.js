@@ -1,9 +1,9 @@
 class Obstacle {
   constructor() {
     this.obstacles = [];
-    this.obstacleMoveSpeed = 1.5;
-    this.width = 25;
-    this.height = 5;
+    this.obstacleMoveSpeed = 5;
+    this.width = 125;
+    this.height = 25;
   }
 
   draw(ctx) {
@@ -36,8 +36,8 @@ class Obstacle {
   generateObstacle(n = 1) {
     for (let i = 0; i < n; i++) {
       this.obstacles.push({
-        x: 250 - this.width + Math.floor(Math.random() * 50 + 1),
-        y: Math.floor((Math.random() * 1000) / 7),
+        x: 500,
+        y: Math.floor(Math.random() * (500 - this.height)),
         width: this.width,
         height: this.height,
       });

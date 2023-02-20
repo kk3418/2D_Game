@@ -5,15 +5,17 @@ import Bullet from "~/bullet";
 
 class Game {
   constructor() {
+    this.canvas = document.getElementById("canvas");
+    this.canvas.width = 1000;
+    this.canvas.height = 600;
+    this.ctx = this.canvas.getContext("2d");
+
     this.keys = [];
     this.input = new InputHandler(this.keys);
-    this.Player = new Player(this.keys);
-    this.Obstacle = new Obstacle();
+
+    this.Player = new Player(this.keys, this.canvas);
+    this.Obstacle = new Obstacle(this.canvas);
     this.Bullet = new Bullet(this.keys, this.Player.player, this.Obstacle.obstacles);
-    this.canvas = document.getElementById("canvas");
-    this.canvas.width = 500;
-    this.canvas.height = 500;
-    this.ctx = this.canvas.getContext("2d");
   }
 
   draw() {

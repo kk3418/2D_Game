@@ -1,18 +1,21 @@
 class Bullet {
   constructor(keys, player, obstacles) {
     this.bullets = [];
-    this.bulletSpeed = 6;
+    this.bulletSpeed = 8;
+    this.width = 50;
+    this.height = 50;
     this.keys = keys;
     this.player = player;
     this.obstacles = obstacles;
     this.maxUpdateTime = 350;
     this.updateTime = 0;
+    this.image = document.getElementById("bullet");
   }
 
   draw(ctx) {
-    ctx.fillStyle = "black";
+    ctx.imageSmoothingEnabled = true;
     this.bullets.forEach((bullet) => {
-      ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+      ctx.drawImage(this.image, bullet.x, bullet.y, bullet.width, bullet.height);
     });
   }
 
@@ -29,10 +32,9 @@ class Bullet {
     for (let i = 0; i < this.bullets.length; i++) {
       for (let j = 0; j < this.obstacles.length; j++) {
         const horizontal = this.bullets[i].x + this.bullets[i].width > this.obstacles[j].x;
-        const bulletY = this.bullets[i].y + this.bullets[i].height;
-        const lowerBound = this.obstacles[j].y + this.obstacles[j].height + this.player.height / 3;
-        const upperBound = this.obstacles[j].y - this.player.height / 3;
-        const vertical = upperBound < bulletY && bulletY < lowerBound;
+        const lowerBound = this.obstacles[j].y + this.obstacles[j].height;
+        const upperBound = this.obstacles[j].y;
+        const vertical = this.bullets[i].y + this.bullets[i].height > upperBound && this.bullets[i].y < lowerBound;
 
         if (horizontal && vertical) {
           deleteTarget = { i, j };
@@ -62,10 +64,10 @@ class Bullet {
 
   generateBullet() {
     const bullet = {
-      width: 150,
-      height: 25,
+      width: this.width,
+      height: this.height,
       x: this.player.x + this.player.width,
-      y: this.player.y + this.player.height / 2 - 2.5,
+      y: this.player.y + this.player.height / 2 - 25,
     };
     this.bullets.push(bullet);
     console.log("bullets status (when shootBullet triggered)", this.bullets);

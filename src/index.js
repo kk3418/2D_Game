@@ -2,6 +2,7 @@ import InputHandler from "~/inputHandler";
 import Obstacle from "~/obstacle";
 import Player from "~/player";
 import Bullet from "~/bullet";
+import Background from "~/background";
 
 class Game {
   constructor() {
@@ -13,6 +14,7 @@ class Game {
     this.keys = [];
     this.input = new InputHandler(this.keys);
 
+    this.Background = new Background(this.canvas);
     this.Player = new Player(this.keys, this.canvas);
     this.Obstacle = new Obstacle(this.canvas);
     this.Bullet = new Bullet(this.keys, this.Player.player, this.Obstacle.obstacles);
@@ -20,12 +22,14 @@ class Game {
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.Background.draw(this.ctx);
     this.Player.draw(this.ctx);
     this.Obstacle.draw(this.ctx);
     this.Bullet.draw(this.ctx);
   }
 
   update({ obstacleNumber = 3, deltaTime }) {
+    this.Background.update();
     this.Obstacle.update(obstacleNumber);
     this.Player.update();
     this.Bullet.update(deltaTime);

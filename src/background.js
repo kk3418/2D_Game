@@ -7,7 +7,6 @@ class Background {
     this.backgroundMoveSpeed = 6;
     this.sky = document.getElementById("layer1");
     this.floor = document.getElementById("layer2");
-    console.log(this.xArray);
   }
 
   draw(ctx) {
